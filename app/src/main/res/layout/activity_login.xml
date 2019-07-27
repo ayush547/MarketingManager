@@ -4,21 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    tools:context=".LoginActivity">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:id="@+id/progress_circular"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:src="@drawable/background_image"
-        android:layout_margin="16dp"/>
+        android:layout_margin="8dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"
+        android:layout_weight="3"
         android:paddingLeft="24dp"
         android:paddingTop="32dp"
         android:paddingRight="24dp"
