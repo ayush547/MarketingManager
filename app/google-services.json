@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "102506026508",
+    "firebase_url": "https://marketingapp-82029.firebaseio.com",
+    "project_id": "marketingapp-82029",
+    "storage_bucket": "marketingapp-82029.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102506026508:android:f91e56c9ef8f68bd",
+        "android_client_info": {
+          "package_name": "com.example.marketingmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102506026508-a5t4icqne8im5nvqt9n7al9jgugk56kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl1wKgwBfOs3v0AG0LuT6pTx9EtrFkoXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102506026508-a5t4icqne8im5nvqt9n7al9jgugk56kb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
