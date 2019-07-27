@@ -3,7 +3,6 @@ package com.example.marketingmanager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +23,6 @@ public class LoginActivity extends Activity {
     Button login;
     String emailTxt,passwordTxt;
     FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthStateListener;
     TextView bottom;
     Boolean loginMode = true;
     ProgressBar progressBar;
@@ -147,6 +145,7 @@ public class LoginActivity extends Activity {
         mAuth.sendPasswordResetEmail(emailTxt).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     Toast.makeText(LoginActivity.this,"Password sent to Email",Toast.LENGTH_LONG).show();
                 }
