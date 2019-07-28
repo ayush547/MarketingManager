@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +28,7 @@ public class LoginActivity extends Activity {
     TextView bottom;
     Boolean loginMode = true;
     ProgressBar progressBar;
+    ImageView logo;
     private static final String TAG = "LoginActivity";
 
     @Override
@@ -37,6 +40,7 @@ public class LoginActivity extends Activity {
         login = findViewById(R.id.btn_login);
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progress_circular);
+        logo = findViewById(R.id.logo);
         bottom=findViewById(R.id.textView);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +117,13 @@ public class LoginActivity extends Activity {
             loginMode = !loginMode;
             bottom.setText("Registered Already? Login Here.");
             login.setText("Register");
+            logo.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_person_add_black_24dp));
         }
         else{
             loginMode = !loginMode;
             bottom.setText("Not registered? Sign Up here.");
             login.setText("Login");
+            logo.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_person_black_24dp));
         }
     }
 
