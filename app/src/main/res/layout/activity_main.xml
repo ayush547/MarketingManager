@@ -18,7 +18,7 @@
         android:textSize="32sp" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchWord"
+        android:id="@+id/searchCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -28,21 +28,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:layout_weight="1">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
             android:id="@+id/addCompany"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="4dp"
-            android:background="@drawable/circular"
+            android:layout_margin="8dp"
+            android:src="@drawable/add_icon"
             android:clickable="true"
             android:gravity="center"
             android:onClick="AddCompany"
-            android:text="+"
             android:textSize="32sp" />
 
     </RelativeLayout>
