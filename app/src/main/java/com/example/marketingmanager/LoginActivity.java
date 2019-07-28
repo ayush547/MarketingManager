@@ -130,6 +130,7 @@ public class LoginActivity extends Activity {
     public void ResetPass(View view) {
         password.setVisibility(View.GONE);
         login.setText("Reset Password");
+        logo.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_person_black_24dp));
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
