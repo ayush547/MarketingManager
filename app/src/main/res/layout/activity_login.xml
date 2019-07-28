@@ -43,8 +43,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_margin="16dp"
-            android:background="@drawable/ic_baseline_assignment_ind_24px" />
+            android:layout_margin="16dp" />
 
         <EditText
             android:id="@+id/input_email"
