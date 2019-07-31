@@ -16,16 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 public class MainActivity extends FragmentActivity implements SearchView.OnQueryTextListener, AddCompanyBottomSheetDialog.BottomSheetListener {
 
@@ -35,6 +32,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
     RecyclerView recyclerView;
     FirebaseAuth mAuth;
     CollectionReference User;
+    DocumentReference Doc;
     UserDataFirestore data;
     private List<UserDataFirestoreCompany> storageCopy = new ArrayList<>();
     private FirebaseFirestore db;
@@ -71,6 +69,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
                         }
                     }
                 });
+
     }
 
 
@@ -120,7 +119,8 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
                 }
             }
             UserDataFirestoreCompany newData = new UserDataFirestoreCompany(companyName, subTeam);
-            storageCopy.add(newData);
+            data.getCompanies().add(newData);
+            User.document(mAuth.getUid()).set(data);
             adapter.updateList(storageCopy);
             adapter.notifyDataSetChanged();
         } else

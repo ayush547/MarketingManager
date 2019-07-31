@@ -112,9 +112,9 @@ public class LoginActivity extends Activity {
                     else{
                         CollectionReference dbUsers = db.collection("Users");
                         UserDataFirestore newUser = new UserDataFirestore(mAuth.getUid());
-                        dbUsers.add(newUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        dbUsers.document(mAuth.getUid()).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(Void aVoid) {
                                 //here is where we go into the app
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
