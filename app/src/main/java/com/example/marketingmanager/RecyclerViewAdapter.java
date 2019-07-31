@@ -18,10 +18,10 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Company> dataNames;
+    private List<UserDataFirestoreCompany> dataNames;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, List<Company> dataNames) {
+    public RecyclerViewAdapter(Context mContext, List<UserDataFirestoreCompany> dataNames) {
         this.dataNames = dataNames;
         this.mContext = mContext;
     }
@@ -38,11 +38,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d("RecyclerViewAdapter", "onBind Called.");
-        if (dataNames.get(i).isSubTeam()) {
+        if (dataNames.get(i).getSubTeam()) {
             viewHolder.initials.setBackground(ContextCompat.getDrawable(mContext, R.drawable.circular_subteam));
         }
-        viewHolder.initials.setText("" + dataNames.get(i).getName().charAt(0));
-        viewHolder.names.setText(dataNames.get(i).getName());
+        viewHolder.initials.setText("" + dataNames.get(i).getCompanyName().charAt(0));
+        viewHolder.names.setText(dataNames.get(i).getCompanyName());
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return dataNames.size();
     }
 
-    public void updateList(List<Company> dataNames) {
+    public void updateList(List<UserDataFirestoreCompany> dataNames) {
         this.dataNames = dataNames;
         notifyDataSetChanged();
     }

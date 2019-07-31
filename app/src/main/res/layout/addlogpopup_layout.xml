@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/whatHappenedEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="What Happened"
+        android:inputType="textCapSentences"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whatHappenedEdit"
+        android:layout_marginLeft="4dp"
+        android:text="Proposal Sent"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/subTeamSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whatHappenedEdit"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="2dp" />
+
+    <Button
+        android:id="@+id/saveAddCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subTeamSwitch"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:text=" Add " />
+
+</RelativeLayout>

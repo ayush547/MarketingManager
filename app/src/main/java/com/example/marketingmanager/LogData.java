@@ -4,6 +4,15 @@ public class LogData {
     String date;
     String time;
     String whatHappened;
+    Boolean proposalSent;
+
+    public Boolean getProposalSent() {
+        return proposalSent;
+    }
+
+    public void setProposalSent(Boolean proposalSent) {
+        this.proposalSent = proposalSent;
+    }
 
     public String getDate() {
         return date;

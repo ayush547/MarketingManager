@@ -3,13 +3,13 @@ package com.example.marketingmanager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Company {
+public class CompanyDataFirestore {
     String nameOfCompany;
     List<ContactDetails> contacts;
     Boolean proposalSent, subTeam, active;
     List<LogData> logs;
 
-    public Company(String nameOfCompany, List<ContactDetails> contacts, Boolean proposalSent, List<LogData> logs, Boolean subTeam, Boolean active) {
+    public CompanyDataFirestore(String nameOfCompany, List<ContactDetails> contacts, Boolean proposalSent, List<LogData> logs, Boolean subTeam, Boolean active) {
         this.nameOfCompany = nameOfCompany;
         this.contacts = contacts;
         this.proposalSent = proposalSent;
@@ -18,7 +18,7 @@ public class Company {
         this.active = active;
     }
 
-    public Company(String nameOfCompany, Boolean subTeam) {
+    public CompanyDataFirestore(String nameOfCompany, Boolean subTeam) {
         this.nameOfCompany = nameOfCompany;
         this.subTeam = subTeam;
         active = true;

@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="Date"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 
     <TextView
@@ -25,6 +26,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="8dp"
         android:text="Time"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 
     <View
@@ -42,12 +44,13 @@
         android:layout_margin="8dp"
         android:layout_marginTop="8dp"
         android:text="What Happened!"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/deleteButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
         android:layout_below="@id/whatHappenedView"
         android:layout_alignParentRight="true"
         android:clickable="true"

@@ -15,9 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LoginActivity extends Activity {
 
@@ -29,6 +39,7 @@ public class LoginActivity extends Activity {
     Boolean loginMode = true;
     ProgressBar progressBar;
     ImageView logo;
+    FirebaseFirestore db;
     private static final String TAG = "LoginActivity";
 
     @Override
@@ -39,6 +50,7 @@ public class LoginActivity extends Activity {
         password = findViewById(R.id.input_password);
         login = findViewById(R.id.btn_login);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progress_circular);
         logo = findViewById(R.id.logo);
         bottom=findViewById(R.id.textView);
@@ -98,7 +110,20 @@ public class LoginActivity extends Activity {
                         progressBar.setVisibility(View.GONE);
                     }
                     else{
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                        CollectionReference dbUsers = db.collection("Users");
+                        UserDataFirestore newUser = new UserDataFirestore(mAuth.getUid());
+                        dbUsers.add(newUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                //here is where we go into the app
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Sign Up Failed, Try Again " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
             });

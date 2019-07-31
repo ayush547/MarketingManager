@@ -12,19 +12,21 @@
 
     <TextView
         android:id="@+id/initials"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/circular"
         android:gravity="center"
         android:text="H"
-        android:textSize="32sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/names"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/initials"
         android:text="Dummy"
         android:textColor="@android:color/black"

@@ -21,7 +21,7 @@ public class AddCompanyBottomSheetDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.addcompany_layout, container, false);
+        View view = inflater.inflate(R.layout.addcompanypopup_layout, container, false);
         final EditText companyName = view.findViewById(R.id.companyName);
         Button save = view.findViewById(R.id.saveAddCompany);
         final Switch subTeam = view.findViewById(R.id.subTeamSwitch);
