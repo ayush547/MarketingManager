@@ -112,13 +112,13 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
     public void onButtonClicked(String companyName, Boolean subTeam) {
         if (!companyName.isEmpty()) {
             for (UserDataFirestoreCompany c : storageCopy) {
-                if (c.getCompanyName().toLowerCase().equals(companyName.toLowerCase())) {
+                if (c.getCompanyName().toLowerCase().equals(companyName.toLowerCase().trim())) {
                     Toast.makeText(this, "Company Name Already Exists.", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
             UserDataFirestoreCompany newData = new UserDataFirestoreCompany(companyName, subTeam);
-            CompanyDataFirestore newCompanyData = new CompanyDataFirestore(newData.getCompanyName(), newData.getSubTeam());
+            CompanyDataFirestore newCompanyData = new CompanyDataFirestore(newData.getCompanyName().trim(), newData.getSubTeam());
             Company.document(newData.getCompanyName()).set(newCompanyData);
             data.getCompanies().add(newData);
             User.document(mAuth.getUid()).set(data);

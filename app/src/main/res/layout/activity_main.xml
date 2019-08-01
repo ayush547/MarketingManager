@@ -8,22 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:text="Companies"
-        android:textSize="32sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#A781DF" />
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchCompany"
         android:layout_width="match_parent"
@@ -31,6 +15,13 @@
         android:layout_margin="8dp"
         android:background="@android:color/white"
         app:queryHint="Find Company" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#ffaf49" />
 
     <RelativeLayout
         android:layout_width="match_parent"

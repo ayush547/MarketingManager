@@ -3,6 +3,8 @@ package com.example.marketingmanager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
+import android.service.autofill.Dataset;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +21,16 @@ import java.util.List;
 
 public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAdapterLog.ViewHolder> {
 
-    private List<LogData> dataNames;
-    private Context mContext;
+    DataShare dataShare;
 
     public RecyclerViewAdapterLog(Context mContext, List<LogData> dataNames) {
         this.dataNames = dataNames;
         this.mContext = mContext;
+        dataShare = (DataShare) mContext;
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.logitem_layout, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
-    }
+    private List<LogData> dataNames;
+    private Context mContext;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -48,13 +45,14 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setCancelable(true);
                 builder.setTitle("Confirm Deletion");
-                builder.setMessage("Are you sure you want to remove Selected Record?");
+                builder.setMessage("Are you sure you want to remove selected record?");
                 builder.setPositiveButton("Confirm",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dataNames.remove(i);
                                 notifyDataSetChanged();
+                                dataShare.setLog(i);
                             }
                         });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -69,14 +67,25 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
         });
     }
 
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.logitem_layout, viewGroup, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
+    }
+
+    public List<LogData> returnList() {
+        return dataNames;
+    }
+
     @Override
     public int getItemCount() {
         return dataNames.size();
     }
 
-    public void updateList(List<LogData> dataNames) {
-        this.dataNames = dataNames;
-        notifyDataSetChanged();
+    public interface DataShare {
+        void setLog(int myData);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -95,5 +104,4 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
         }
 
     }
-
 }

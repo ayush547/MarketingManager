@@ -40,7 +40,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class DetailedLogActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener {
+public class DetailedLogActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, RecyclerViewAdapterLog.DataShare {
+
+    RecyclerViewAdapterLog.DataShare dataShare;
 
     private static final String TAG = "MainActivity";
     RecyclerViewAdapterLog adapter;
@@ -137,5 +139,11 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
         adapter = new RecyclerViewAdapterLog(this, storageCopy);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void setLog(int myData) {
+        data.getLogs().remove(myData);
+        CompanyReference.document(companyName).set(data);
     }
 }
