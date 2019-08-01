@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Intent outToForce = new Intent(mContext, DetailedLogActivity.class);
-                //send company identification to intent
+                outToForce.putExtra("companyName", dataNames.get(i).getCompanyName());
                 mContext.startActivity(outToForce);
             }
         });

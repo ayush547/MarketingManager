@@ -3,7 +3,6 @@ package com.example.marketingmanager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,6 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
         //what makes the view special
         Log.d("RecyclerViewAdapterLog", "onBind Called.");
         viewHolder.date.setText(dataNames.get(i).getDate());
-        viewHolder.time.setText(dataNames.get(i).getTime());
         viewHolder.whatHappened.setText(dataNames.get(i).getWhatHappened());
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override

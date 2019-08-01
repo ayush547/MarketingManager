@@ -22,7 +22,7 @@
         android:layout_height="2dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:background="#B5BAFF" />
+        android:background="#A781DF" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchCompany"
@@ -50,7 +50,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="8dp"
-            android:src="@drawable/add_icon"
+            android:src="@drawable/ic_add"
             android:clickable="true"
             android:gravity="center"
             android:onClick="AddCompany"

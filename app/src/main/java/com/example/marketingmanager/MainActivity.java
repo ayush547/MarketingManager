@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,8 +30,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
     RecyclerViewAdapter adapter;
     RecyclerView recyclerView;
     FirebaseAuth mAuth;
-    CollectionReference User;
-    DocumentReference Doc;
+    CollectionReference User, Company;
     UserDataFirestore data;
     private List<UserDataFirestoreCompany> storageCopy = new ArrayList<>();
     private FirebaseFirestore db;
@@ -43,6 +41,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
         setContentView(R.layout.activity_main);
         db = FirebaseFirestore.getInstance();
         User = db.collection("Users");
+        Company = db.collection("Companies");
         mAuth = FirebaseAuth.getInstance();
         searchBox = findViewById(R.id.searchCompany);
         searchBox.setOnQueryTextListener(this);
@@ -89,17 +88,17 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
 
     @Override
     public boolean onQueryTextChange(String s) {
-        if (s.isEmpty()) {
-            adapter.updateList(storageCopy);
+        if (!s.isEmpty()) {
+            String userInput = s.toLowerCase();
+            List<UserDataFirestoreCompany> dataNames = new ArrayList<>();
+            for (UserDataFirestoreCompany f : storageCopy) {
+                if (f.getCompanyName().toLowerCase().contains(userInput))
+                    dataNames.add(f);
+            }
+            adapter.updateList(dataNames);
             return true;
         }
-        String userInput = s.toLowerCase();
-        List<UserDataFirestoreCompany> dataNames = new ArrayList<>();
-        for (UserDataFirestoreCompany f : storageCopy) {
-            if (f.getCompanyName().toLowerCase().contains(userInput))
-                dataNames.add(f);
-        }
-        adapter.updateList(dataNames);
+        adapter.updateList(storageCopy);
         return true;
     }
 
@@ -119,6 +118,8 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
                 }
             }
             UserDataFirestoreCompany newData = new UserDataFirestoreCompany(companyName, subTeam);
+            CompanyDataFirestore newCompanyData = new CompanyDataFirestore(newData.getCompanyName(), newData.getSubTeam());
+            Company.document(newData.getCompanyName()).set(newCompanyData);
             data.getCompanies().add(newData);
             User.document(mAuth.getUid()).set(data);
             adapter.updateList(storageCopy);

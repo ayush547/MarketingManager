@@ -2,9 +2,17 @@ package com.example.marketingmanager;
 
 public class LogData {
     String date;
-    String time;
     String whatHappened;
     Boolean proposalSent;
+
+    public LogData() {
+    }
+
+    public LogData(String date, String whatHappened, Boolean proposalSent) {
+        this.date = date;
+        this.whatHappened = whatHappened;
+        this.proposalSent = proposalSent;
+    }
 
     public Boolean getProposalSent() {
         return proposalSent;
@@ -20,14 +28,6 @@ public class LogData {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getWhatHappened() {

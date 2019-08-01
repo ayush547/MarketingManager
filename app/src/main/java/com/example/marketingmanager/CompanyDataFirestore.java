@@ -27,15 +27,55 @@ public class CompanyDataFirestore {
         logs = new ArrayList<>();
     }
 
-    public Boolean isSubTeam() {
+    public CompanyDataFirestore() {
+    }
+
+
+    public String getNameOfCompany() {
+        return nameOfCompany;
+    }
+
+    public void setNameOfCompany(String nameOfCompany) {
+        this.nameOfCompany = nameOfCompany;
+    }
+
+    public List<ContactDetails> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<ContactDetails> contacts) {
+        this.contacts = contacts;
+    }
+
+    public Boolean getProposalSent() {
+        return proposalSent;
+    }
+
+    public void setProposalSent(Boolean proposalSent) {
+        this.proposalSent = proposalSent;
+    }
+
+    public Boolean getSubTeam() {
         return subTeam;
     }
 
-    public Boolean isActive() {
+    public void setSubTeam(Boolean subTeam) {
+        this.subTeam = subTeam;
+    }
+
+    public Boolean getActive() {
         return active;
     }
 
-    public String getName() {
-        return nameOfCompany;
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<LogData> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<LogData> logs) {
+        this.logs = logs;
     }
 }

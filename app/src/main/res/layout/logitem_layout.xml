@@ -19,16 +19,6 @@
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
-        android:text="Time"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
-
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"

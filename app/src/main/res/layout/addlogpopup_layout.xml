@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/whatHappenedEdit"
@@ -22,20 +23,21 @@
         android:textSize="18sp" />
 
     <Switch
-        android:id="@+id/subTeamSwitch"
+        android:id="@+id/proposalSentSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/whatHappenedEdit"
         android:layout_alignParentEnd="true"
         android:layout_margin="2dp" />
 
-    <Button
-        android:id="@+id/saveAddCompany"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/date"
         android:layout_height="wrap_content"
-        android:layout_below="@id/subTeamSwitch"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:text=" Add " />
+        android:layout_width="match_parent"
+        android:layout_below="@id/proposalSentSwitch"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:text="Date"
+        android:textSize="18sp" />
 
 </RelativeLayout>
