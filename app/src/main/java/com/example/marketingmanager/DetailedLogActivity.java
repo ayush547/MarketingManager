@@ -54,6 +54,7 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     TextView date;
     private List<LogData> storageCopy = new ArrayList<>();
     private FirebaseFirestore db;
+    TextView companyNameTextView;
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -68,12 +69,14 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_log);
+        companyNameTextView = findViewById(R.id.companyName);
         db = FirebaseFirestore.getInstance();
         CompanyReference = db.collection("Companies");
         mAuth = FirebaseAuth.getInstance();
         Log.d(TAG, "onCreate started");
         Intent in = getIntent();
         companyName = in.getStringExtra("companyName");
+        companyNameTextView.setText(companyName);
         onStart();
     }
 
@@ -142,8 +145,7 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     }
 
     @Override
-    public void setLog(int myData) {
-        data.getLogs().remove(myData);
+    public void setLog() {
         CompanyReference.document(companyName).set(data);
     }
 }

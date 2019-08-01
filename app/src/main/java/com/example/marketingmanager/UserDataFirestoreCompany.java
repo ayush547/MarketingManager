@@ -2,7 +2,7 @@ package com.example.marketingmanager;
 
 public class UserDataFirestoreCompany {
     String companyName;
-    Boolean subTeam;
+    Boolean subTeam, active;
 
     public UserDataFirestoreCompany(String companyName, Boolean subTeam) {
         this.companyName = companyName;

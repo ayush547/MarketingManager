@@ -52,7 +52,7 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
                             public void onClick(DialogInterface dialog, int which) {
                                 dataNames.remove(i);
                                 notifyDataSetChanged();
-                                dataShare.setLog(i);
+                                dataShare.setLog();
                             }
                         });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -85,7 +85,7 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
     }
 
     public interface DataShare {
-        void setLog(int myData);
+        void setLog();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
