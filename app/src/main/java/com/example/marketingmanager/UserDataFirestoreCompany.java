@@ -7,6 +7,15 @@ public class UserDataFirestoreCompany {
     public UserDataFirestoreCompany(String companyName, Boolean subTeam) {
         this.companyName = companyName;
         this.subTeam = subTeam;
+        active = true;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public UserDataFirestoreCompany() {

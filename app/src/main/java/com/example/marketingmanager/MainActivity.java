@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements SearchView.OnQueryTextListener, AddCompanyBottomSheetDialog.BottomSheetListener {
+public class MainActivity extends FragmentActivity implements RecyclerViewAdapter.DataShare, SearchView.OnQueryTextListener, AddCompanyBottomSheetDialog.BottomSheetListener {
 
     private static final String TAG = "MainActivity";
     SearchView searchBox;
@@ -131,5 +131,10 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
             adapter.notifyDataSetChanged();
         } else
             Toast.makeText(this, "Enter Valid Name.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setLog() {
+        User.document(mAuth.getUid()).set(data);
     }
 }
