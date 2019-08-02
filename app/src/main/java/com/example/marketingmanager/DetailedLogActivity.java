@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class DetailedLogActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, RecyclerViewAdapterLog.DataShare, RecyclerViewAdapterContactDetails.LogShare {
+public class DetailedLogActivity extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, RecyclerViewAdapterLog.DataShare, RecyclerViewAdapterContactDetails.LogShare {
 
     private static final String TAG = "MainActivity";
     RecyclerViewAdapterLog adapter;
@@ -45,21 +48,29 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     CompanyDataFirestore data;
     Switch proposal;
     ProgressBar progressBar;
-    TextView date;
+    TextView date, time;
     private List<LogData> storageCopy = new ArrayList<>();
     TextView companyNameTextView, psSentOn;
     private FirebaseFirestore db;
+    Calendar z;
     private List<ContactDetails> storageCopyContacts = new ArrayList<>();
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        date.setText(DateFormat.getDateInstance().format(c.getTime()));
+        //Calendar c = Calendar.getInstance();
+        z.set(Calendar.YEAR, year);
+        z.set(Calendar.MONTH, month);
+        z.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        date.setText(DateFormat.getDateInstance().format(z.getTime()));
     }
 
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        //Calendar c = Calendar.getInstance();
+        z.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        z.set(Calendar.MINUTE, minute);
+        time.setText(DateFormat.getTimeInstance().format(z.getTime()));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +139,47 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     private void addReminder() {
         //add reminder feature
         AlertDialog.Builder builder = new AlertDialog.Builder(DetailedLogActivity.this);
+        final View view1 = LayoutInflater.from(DetailedLogActivity.this).inflate(R.layout.addreminderpopup_layout, null);
+        final EditText reminderEdit = view1.findViewById(R.id.reminderEdit);
+        reminderEdit.setText("Call " + companyName);
+        date = view1.findViewById(R.id.date);
+        time = view1.findViewById(R.id.time);
+        final Calendar c = Calendar.getInstance();
+        z = Calendar.getInstance();
+        date.setText(DateFormat.getDateInstance().format(c.getTime()));
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "Date Picker");
+            }
+        });
+        time.setText(DateFormat.getTimeInstance().format(c.getTime()));
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "Time Picker");
+            }
+        });
+        builder.setView(view1).setPositiveButton("Save Reminder", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra(CalendarContract.Reminders.TITLE, "Marketing Manager Reminder");
+                intent.putExtra(CalendarContract.Reminders.DESCRIPTION, reminderEdit.getText().toString());
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, z.getTimeInMillis() + 3600 * 1000);
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, z.getTimeInMillis());
+                startActivity(intent);
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 
     public void addLog() {
@@ -150,10 +202,6 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
             public void onClick(DialogInterface dialog, int which) {
                 if (whatHappened.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "What happened cant be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (date.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Date input needed", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 LogData newData = new LogData(date.getText().toString(), whatHappened.getText().toString(), proposalSent.isChecked());
@@ -201,10 +249,10 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
                             return;
                         }
                         ContactDetails newData = new ContactDetails(POCs, designations, contacts, emails);
-                        data.getContacts().add(newData);
+                        data.getContacts().add(0, newData);
                         CompanyReference.document(companyName).set(data);
                         adapterContactDetails.notifyDataSetChanged();
-                        recyclerViewContact.getLayoutManager().scrollToPosition(storageCopyContacts.size() - 1);
+                        recyclerViewContact.getLayoutManager().scrollToPosition(0);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

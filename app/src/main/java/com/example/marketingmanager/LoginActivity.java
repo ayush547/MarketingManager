@@ -61,6 +61,10 @@ public class LoginActivity extends Activity {
                 Login();
             }
         });
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     boolean isEmailValid(CharSequence email) {
