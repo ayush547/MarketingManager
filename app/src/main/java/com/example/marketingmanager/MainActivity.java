@@ -120,7 +120,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
             UserDataFirestoreCompany newData = new UserDataFirestoreCompany(companyName, subTeam);
             CompanyDataFirestore newCompanyData = new CompanyDataFirestore(newData.getCompanyName().trim(), newData.getSubTeam());
             Company.document(newData.getCompanyName()).set(newCompanyData);
-            data.getCompanies().add(newData);
+            data.getCompanies().add(0, newData);
             User.document(mAuth.getUid()).set(data);
             adapter.updateList(storageCopy);
             adapter.notifyDataSetChanged();

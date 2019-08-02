@@ -3,13 +3,13 @@ package com.example.marketingmanager;
 public class ContactDetails {
     String nameOfPOC;
     String designation;
-    Integer[] contactNo;
+    String contactNo;
     String email;
 
     public ContactDetails() {
     }
 
-    public ContactDetails(String nameOfPOC, String designation, Integer[] contactNo, String email) {
+    public ContactDetails(String nameOfPOC, String designation, String contactNo, String email) {
         this.nameOfPOC = nameOfPOC;
         this.designation = designation;
         this.contactNo = contactNo;
@@ -32,11 +32,11 @@ public class ContactDetails {
         this.designation = designation;
     }
 
-    public Integer[] getContactNo() {
+    public String getContactNo() {
         return contactNo;
     }
 
-    public void setContactNo(Integer[] contactNo) {
+    public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
 

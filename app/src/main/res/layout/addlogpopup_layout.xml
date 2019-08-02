@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/whatHappenedEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:hint="What Happened"
-        android:inputType="textCapSentences"
-        android:textSize="18sp" />
-
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/whatHappenedEdit"
-        android:layout_marginLeft="4dp"
-        android:text="Proposal Sent"
-        android:textSize="18sp" />
+        android:elevation="16dp"
+        app:cardCornerRadius="4dp">
 
-    <Switch
-        android:id="@+id/proposalSentSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/whatHappenedEdit"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="2dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_below="@id/proposalSentSwitch"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
-        android:text="Date"
-        android:textSize="18sp" />
+            <EditText
+                android:id="@+id/whatHappenedEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:hint="What Happened"
+                android:inputType="textCapSentences"
+                android:textSize="18sp" />
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/whatHappenedEdit"
+                android:layout_marginLeft="4dp"
+                android:text="Proposal Sent"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/proposalSentSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/whatHappenedEdit"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="2dp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/proposalSentSwitch"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Date"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

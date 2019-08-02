@@ -30,7 +30,6 @@ public class CompanyDataFirestore {
     public CompanyDataFirestore() {
     }
 
-
     public String getNameOfCompany() {
         return nameOfCompany;
     }
