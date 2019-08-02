@@ -2,6 +2,7 @@ package com.example.marketingmanager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,10 +21,12 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
 
     private List<ContactDetails> dataNames;
     private Context mContext;
+    LogShare logShare;
 
     public RecyclerViewAdapterContactDetails(Context mContext, List<ContactDetails> dataNames) {
         this.dataNames = dataNames;
         this.mContext = mContext;
+        logShare = (LogShare) mContext;
     }
 
     @NonNull
@@ -43,6 +47,33 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         Log.d("RecyclerViewAdapter", "onBind Called.");
         viewHolder.nameOfPOC.setText("" + dataNames.get(i).getNameOfPOC());
+        viewHolder.nameOfPOC.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_delete, 0, 0, 0);
+        viewHolder.nameOfPOC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setCancelable(true);
+                builder.setTitle("Confirm Deletion");
+                builder.setMessage("Are you sure you want to remove selected record?");
+                builder.setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dataNames.remove(i);
+                                notifyDataSetChanged();
+                                logShare.setLog();
+                            }
+                        });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         if (dataNames.get(i).getDesignation().isEmpty())
             viewHolder.designation.setVisibility(View.GONE);
         else viewHolder.designation.setText(dataNames.get(i).getDesignation());
@@ -62,12 +93,18 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
         }
         if (dataNames.get(i).getEmail().isEmpty())
             viewHolder.email.setVisibility(View.GONE);
-        else viewHolder.email.setText(dataNames.get(i).getEmail());
+        else {
+            viewHolder.email.setText(dataNames.get(i).getEmail());
+        }
     }
 
     public void updateList(List<ContactDetails> dataNames) {
         this.dataNames = dataNames;
         notifyDataSetChanged();
+    }
+
+    public interface LogShare {
+        void setLog();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class DetailedLogActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, RecyclerViewAdapterLog.DataShare {
+public class DetailedLogActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, RecyclerViewAdapterLog.DataShare, RecyclerViewAdapterContactDetails.LogShare {
 
     private static final String TAG = "MainActivity";
     RecyclerViewAdapterLog adapter;
@@ -227,4 +227,5 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     public void setLog() {
         CompanyReference.document(companyName).set(data);
     }
+
 }
