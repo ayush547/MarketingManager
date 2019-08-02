@@ -24,27 +24,34 @@
                 android:id="@+id/nameOfPOC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp" />
+                android:layout_margin="4dp"
+                android:gravity="end"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/designation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp" />
+                android:layout_margin="4dp"
+                android:gravity="end"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contactNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:textSize="12sp"
+                android:gravity="end"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp" />
+                android:layout_margin="4dp"
+                android:gravity="end"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

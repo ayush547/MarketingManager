@@ -60,7 +60,7 @@
                 android:id="@+id/recyclerViewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ps"
+                android:layout_below="@id/psSentOn"
                 android:layout_margin="16dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

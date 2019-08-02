@@ -46,9 +46,11 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
         if (dataNames.get(i).getDesignation().isEmpty())
             viewHolder.designation.setVisibility(View.GONE);
         else viewHolder.designation.setText(dataNames.get(i).getDesignation());
-        if (dataNames.get(i).getEmail().isEmpty()) viewHolder.designation.setVisibility(View.GONE);
+        if (dataNames.get(i).getContactNo().isEmpty())
+            viewHolder.designation.setVisibility(View.GONE);
         else {
             viewHolder.contactNo.setText(dataNames.get(i).getContactNo());
+            viewHolder.contactNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_call, 0, 0, 0);
             viewHolder.contactNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,8 +60,8 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
                 }
             });
         }
-        if (dataNames.get(i).getContactNo().isEmpty())
-            viewHolder.designation.setVisibility(View.GONE);
+        if (dataNames.get(i).getEmail().isEmpty())
+            viewHolder.email.setVisibility(View.GONE);
         else viewHolder.email.setText(dataNames.get(i).getEmail());
     }
 
