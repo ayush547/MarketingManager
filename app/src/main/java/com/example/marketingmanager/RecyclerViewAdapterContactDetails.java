@@ -22,6 +22,7 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
     private List<ContactDetails> dataNames;
     private Context mContext;
     LogShare logShare;
+    String contactString;
 
     public RecyclerViewAdapterContactDetails(Context mContext, List<ContactDetails> dataNames) {
         this.dataNames = dataNames;
@@ -47,6 +48,7 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         Log.d("RecyclerViewAdapter", "onBind Called.");
         viewHolder.nameOfPOC.setText("" + dataNames.get(i).getNameOfPOC());
+        contactString = "Name - " + dataNames.get(i).getNameOfPOC();
         viewHolder.nameOfPOC.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_delete, 0, 0, 0);
         viewHolder.nameOfPOC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +78,15 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
         });
         if (dataNames.get(i).getDesignation().isEmpty())
             viewHolder.designation.setVisibility(View.GONE);
-        else viewHolder.designation.setText(dataNames.get(i).getDesignation());
+        else {
+            viewHolder.designation.setText(dataNames.get(i).getDesignation());
+            contactString += "\nDesignation - " + dataNames.get(i).getDesignation();
+        }
         if (dataNames.get(i).getContactNo().isEmpty())
             viewHolder.designation.setVisibility(View.GONE);
         else {
             viewHolder.contactNo.setText(dataNames.get(i).getContactNo());
+            contactString += "\nNumber - " + dataNames.get(i).getContactNo();
             viewHolder.contactNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_call, 0, 0, 0);
             viewHolder.contactNo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,11 +97,20 @@ public class RecyclerViewAdapterContactDetails extends RecyclerView.Adapter<Recy
                 }
             });
         }
-        if (dataNames.get(i).getEmail().isEmpty())
-            viewHolder.email.setVisibility(View.GONE);
-        else {
-            viewHolder.email.setText(dataNames.get(i).getEmail());
-        }
+        if (!dataNames.get(i).getEmail().isEmpty())
+            contactString += "\nEmail - " + dataNames.get(i).getEmail();
+        viewHolder.email.setText(dataNames.get(i).getEmail());
+        viewHolder.email.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_share, 0, 0, 0);
+        viewHolder.email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, contactString);
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Contacts");
+                mContext.startActivity(Intent.createChooser(shareIntent, "Share Contact Details"));
+            }
+        });
     }
 
     public void updateList(List<ContactDetails> dataNames) {

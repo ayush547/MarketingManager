@@ -56,6 +56,14 @@
                 android:layout_marginTop="8dp"
                 android:textSize="18sp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/psSentOn"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#ffaf49" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewContact"
                 android:layout_width="match_parent"
@@ -64,13 +72,6 @@
                 android:layout_margin="16dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#ffaf49" />
 
     <RelativeLayout
         android:layout_width="match_parent"

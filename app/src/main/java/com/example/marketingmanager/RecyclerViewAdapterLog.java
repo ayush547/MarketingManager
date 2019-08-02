@@ -3,10 +3,12 @@ package com.example.marketingmanager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +39,16 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
         Log.d("RecyclerViewAdapterLog", "onBind Called.");
         viewHolder.date.setText(dataNames.get(i).getDate());
         viewHolder.whatHappened.setText(dataNames.get(i).getWhatHappened());
+        viewHolder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, dataNames.get(i).getWhatHappened() + " - Happened On " + dataNames.get(i).getDate());
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Log");
+                mContext.startActivity(Intent.createChooser(shareIntent, "Share Log"));
+            }
+        });
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +102,7 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
 
         TextView date, time, whatHappened;
         RelativeLayout parentLayout;
-        ImageView delete;
+        ImageButton delete, share;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +111,7 @@ public class RecyclerViewAdapterLog extends RecyclerView.Adapter<RecyclerViewAda
             whatHappened = itemView.findViewById(R.id.whatHappenedView);
             parentLayout = itemView.findViewById(R.id.parentLayout);
             delete = itemView.findViewById(R.id.deleteButton);
+            share = itemView.findViewById(R.id.shareButton);
         }
 
     }

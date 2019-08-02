@@ -48,15 +48,33 @@
                 android:text="What Happened!"
                 android:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/deleteButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/whatHappenedView"
-                android:layout_alignParentRight="true"
-                android:clickable="true"
-                android:padding="8dp"
-                android:src="@drawable/delete_icon" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:clickable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_delete_black" />
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:clickable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_share_black" />
+            </LinearLayout>
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
