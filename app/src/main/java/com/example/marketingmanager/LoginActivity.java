@@ -95,6 +95,7 @@ public class LoginActivity extends Activity {
                     }
                     else{
                         startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                        finish();
                     }
                 }
             });
@@ -117,6 +118,7 @@ public class LoginActivity extends Activity {
                             public void onSuccess(Void aVoid) {
                                 //here is where we go into the app
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -135,6 +137,7 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 Login();
             }
         });
@@ -159,13 +162,13 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 Reset();
             }
         });
     }
 
     private void Reset() {
-        progressBar.setVisibility(View.VISIBLE);
         emailTxt = email.getText().toString();
         if(!isEmailValid(emailTxt)){
             email.setError("Invalid Email Entered");

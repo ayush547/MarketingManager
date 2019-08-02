@@ -3,6 +3,7 @@ package com.example.marketingmanager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
     FirebaseAuth mAuth;
     CollectionReference User, Company;
     UserDataFirestore data;
+    ProgressBar progressBar;
     private List<UserDataFirestoreCompany> storageCopy = new ArrayList<>();
     private FirebaseFirestore db;
 
@@ -39,6 +41,7 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
         User = db.collection("Users");
         Company = db.collection("Companies");
@@ -62,9 +65,11 @@ public class MainActivity extends FragmentActivity implements SearchView.OnQuery
                                 data = documentSnapshot.toObject(UserDataFirestore.class);
                                 storageCopy = data.getCompanies();
                                 initRecyclerView();
+                                progressBar.setVisibility(View.GONE);
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     }
                 });

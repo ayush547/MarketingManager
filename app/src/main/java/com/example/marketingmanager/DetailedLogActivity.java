@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
     String companyName;
     CompanyDataFirestore data;
     Switch proposal;
+    ProgressBar progressBar;
     TextView date;
     private List<LogData> storageCopy = new ArrayList<>();
     TextView companyNameTextView, psSentOn;
@@ -63,6 +65,7 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_log);
         companyNameTextView = findViewById(R.id.companyName);
+        progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
         proposal = findViewById(R.id.proposalSentStatus);
         psSentOn = findViewById(R.id.psSentOn);
@@ -88,8 +91,10 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
                             storageCopyContacts = data.getContacts();
                             proposal.setChecked(data.proposalSent);
                             initRecyclerView();
+                            progressBar.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
 
                     }
@@ -221,6 +226,7 @@ public class DetailedLogActivity extends FragmentActivity implements DatePickerD
         recyclerViewContact.setAdapter(adapterContactDetails);
         recyclerView.setLayoutManager(new LinearLayoutManager(DetailedLogActivity.this));
         recyclerViewContact.setLayoutManager(new LinearLayoutManager(DetailedLogActivity.this, LinearLayoutManager.HORIZONTAL, true));
+        recyclerViewContact.getLayoutManager().scrollToPosition(data.getContacts().size() - 1);
     }
 
     @Override
