@@ -188,8 +188,8 @@ public class DetailedLogActivity extends FragmentActivity implements TimePickerD
         final EditText whatHappened = view1.findViewById(R.id.whatHappenedEdit);
         final Switch proposalSent = view1.findViewById(R.id.proposalSentSwitch);
         date = view1.findViewById(R.id.date);
-        Calendar c = Calendar.getInstance();
-        date.setText(DateFormat.getDateInstance().format(c.getTime()));
+        z = Calendar.getInstance();
+        date.setText(DateFormat.getDateInstance().format(z.getTime()));
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
