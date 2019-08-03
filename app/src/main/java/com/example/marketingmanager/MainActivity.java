@@ -1,12 +1,16 @@
 package com.example.marketingmanager;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +40,7 @@ public class MainActivity extends FragmentActivity implements RecyclerViewAdapte
     ProgressBar progressBar;
     private List<UserDataFirestoreCompany> storageCopy = new ArrayList<>();
     private FirebaseFirestore db;
+    ImageButton moreOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +51,61 @@ public class MainActivity extends FragmentActivity implements RecyclerViewAdapte
         User = db.collection("Users");
         Company = db.collection("Companies");
         mAuth = FirebaseAuth.getInstance();
+        moreOptions = findViewById(R.id.moreOptions);
         searchBox = findViewById(R.id.searchCompany);
         searchBox.setOnQueryTextListener(this);
         searchBox.setIconifiedByDefault(false);
         Log.d(TAG, "onCreate started");
+        moreOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Choose option")
+                        .setMessage("What do you want to do? ")
+                        .setPositiveButton("Sign Out", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                signOut();
+                            }
+                        })
+                        .setNegativeButton("Delete All Data!!!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteData();
+                            }
+                        });
+                builder.show();
+            }
+        });
         onStart();
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        Intent outToLogin = new Intent(this, LoginActivity.class);
+        startActivity(outToLogin);
+        finish();
+    }
+
+    private void deleteData() {
+        User.whereEqualTo(UserDataFirestore.Key_ID, mAuth.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                data = documentSnapshot.toObject(UserDataFirestore.class);
+                                for (UserDataFirestoreCompany c : data.getCompanies())
+                                    Company.document(c.getCompanyName()).delete();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        UserDataFirestore newUser = new UserDataFirestore(mAuth.getUid());
+        User.document(mAuth.getUid()).set(newUser);
+        signOut();
     }
 
     @Override
