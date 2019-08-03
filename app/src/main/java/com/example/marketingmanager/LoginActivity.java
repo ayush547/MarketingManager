@@ -77,13 +77,13 @@ public class LoginActivity extends Activity {
 
         if(!isEmailValid(emailTxt)){
             email.setError("Invalid Email Entered");
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             email.requestFocus();
             return;
         }
         if(passwordTxt.isEmpty() || passwordTxt.length()<6){
             password.setError("Invalid Password, Length must be at least 6");
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             password.requestFocus();
             return;
         }
@@ -95,7 +95,7 @@ public class LoginActivity extends Activity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()){
                         Toast.makeText(getApplicationContext(),"Login In Failed, Try Again "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                     else{
                         startActivity(new Intent(LoginActivity.this,MainActivity.class));
@@ -112,7 +112,7 @@ public class LoginActivity extends Activity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()){
                         Toast.makeText(getApplicationContext(),"Sign Up Failed, Try Again "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                     else{
                         CollectionReference dbUsers = db.collection("Users");
@@ -128,6 +128,7 @@ public class LoginActivity extends Activity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(getApplicationContext(), "Sign Up Failed, Try Again " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
                         });
                     }
@@ -176,7 +177,7 @@ public class LoginActivity extends Activity {
         emailTxt = email.getText().toString();
         if(!isEmailValid(emailTxt)){
             email.setError("Invalid Email Entered");
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             email.requestFocus();
             return;
         }
@@ -184,7 +185,7 @@ public class LoginActivity extends Activity {
         mAuth.sendPasswordResetEmail(emailTxt).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.INVISIBLE);
                 if(task.isSuccessful()){
                     Toast.makeText(LoginActivity.this,"Password sent to Email",Toast.LENGTH_LONG).show();
                 }
