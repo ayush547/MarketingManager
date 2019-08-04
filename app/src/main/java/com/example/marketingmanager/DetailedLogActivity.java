@@ -167,8 +167,8 @@ public class DetailedLogActivity extends FragmentActivity implements TimePickerD
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Intent.ACTION_INSERT);
                 intent.setType("vnd.android.cursor.item/event");
-                intent.putExtra(CalendarContract.Reminders.TITLE, "Marketing Manager Reminder");
-                intent.putExtra(CalendarContract.Reminders.DESCRIPTION, reminderEdit.getText().toString());
+                intent.putExtra(CalendarContract.Reminders.TITLE, reminderEdit.getText().toString());
+                intent.putExtra(CalendarContract.Reminders.DESCRIPTION, "Marketing Manager Reminder");
                 intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, z.getTimeInMillis() + 3600 * 1000);
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, z.getTimeInMillis());
                 startActivity(intent);
