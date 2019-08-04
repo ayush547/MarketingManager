@@ -274,7 +274,7 @@ public class DetailedLogActivity extends FragmentActivity implements TimePickerD
         recyclerViewContact.setAdapter(adapterContactDetails);
         recyclerView.setLayoutManager(new LinearLayoutManager(DetailedLogActivity.this));
         recyclerViewContact.setLayoutManager(new LinearLayoutManager(DetailedLogActivity.this, LinearLayoutManager.HORIZONTAL, true));
-        recyclerViewContact.getLayoutManager().scrollToPosition(data.getContacts().size() - 1);
+        recyclerViewContact.getLayoutManager().scrollToPosition(0);
     }
 
     @Override
